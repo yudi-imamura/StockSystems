@@ -1,5 +1,4 @@
 package com.felicidade.sistema.service.impl;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,7 +117,7 @@ public class EntradaServiceImpl implements EntradaService {
 	@Transactional(readOnly = true)
 	@Override
 	public Page<Entrada> findAll(int paginas, int nr_registros) {
-		PageRequest page = PageRequest.of(paginas, nr_registros);
+		Pageable page = PageRequest.of(paginas, nr_registros);
 		return this.findAll(page);
 	}
 	

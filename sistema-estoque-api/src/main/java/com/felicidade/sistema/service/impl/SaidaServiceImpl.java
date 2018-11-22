@@ -23,14 +23,6 @@ public class SaidaServiceImpl implements SaidaService {
 
 	@Autowired
 	private SaidaDAO dao;
-	
-
-	@Transactional(readOnly = true)
-	@Override
-	public List<Saida> findAll() {
-		return dao.findAll();
-	}
-
 
 	@Override
 	public Iterable<Saida> findAll(Sort sort) {
@@ -38,13 +30,11 @@ public class SaidaServiceImpl implements SaidaService {
 		return null;
 	}
 
-
 	@Override
 	public Page<Saida> findAll(Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 	@Override
 	public <S extends Saida> S save(S entity) {
@@ -52,34 +42,29 @@ public class SaidaServiceImpl implements SaidaService {
 		return null;
 	}
 
-
 	@Override
 	public <S extends Saida> Iterable<S> saveAll(Iterable<S> entities) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-
 	@Override
-	public Optional<Saida> findById(Long id) {
+	public Optional<Saida> findById(SaidaPK id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-
 	@Override
-	public boolean existsById(Long id) {
+	public boolean existsById(SaidaPK id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-
 	@Override
-	public Iterable<Saida> findAllById(Iterable<Long> ids) {
+	public Iterable<Saida> findAllById(Iterable<SaidaPK> ids) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 	@Override
 	public long count() {
@@ -87,20 +72,16 @@ public class SaidaServiceImpl implements SaidaService {
 		return 0;
 	}
 
-
 	@Override
-	public void deleteById(Long id) {
+	public void deleteById(SaidaPK id) {
 		// TODO Auto-generated method stub
 		
 	}
-
 
 	@Override
 	public void delete(Saida entity) {
-		// TODO Auto-generated method stub
-		
+		this.delete(entity);
 	}
-
 
 	@Override
 	public void deleteAll(Iterable<? extends Saida> entities) {
@@ -108,37 +89,38 @@ public class SaidaServiceImpl implements SaidaService {
 		
 	}
 
-
 	@Override
 	public void deleteAll() {
-		// TODO Auto-generated method stub
-		
+		this.deleteAll();
 	}
-
 
 	@Override
 	public void saveSaida(Saida saida) {
-		dao.save(saida);
+		dao.update(saida);
 	}
-
 
 	@Override
 	public void update(Saida saida) {
 		dao.update(saida);
 	}
 
-
 	@Transactional(readOnly = true)
-	@Override
 	public Saida buscarPorSaida(SaidaPK entradaPK) {
 		return dao.findById(entradaPK);
 	}
 
-	@Transactional(readOnly = true)
 	@Override
+	public List<Saida> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	@Transactional(readOnly = true)
 	public Page<Saida> findAll(int paginas, int nr_registros) {
-		PageRequest page = PageRequest.of(paginas, nr_registros);
+		Pageable page = PageRequest.of(paginas, nr_registros);
 		return this.findAll(page);
 	}
+	
 
 }

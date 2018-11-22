@@ -10,14 +10,14 @@ import javax.persistence.ManyToOne;
 @Embeddable
 public class TelefonePK implements Serializable{
 
-	private Long cd_telefone;
+	private long cd_telefone;
 	private AfiliadaPK afiliada_id;
 	
 	
-	public Long getCd_telefone() {
+	public long getCd_telefone() {
 		return cd_telefone;
 	}
-	public void setCd_telefone(Long cd_telefone) {
+	public void setCd_telefone(long cd_telefone) {
 		this.cd_telefone = cd_telefone;
 	}
 	public AfiliadaPK getAfiliada_id() {
@@ -26,7 +26,7 @@ public class TelefonePK implements Serializable{
 	public void setAfiliada_id(AfiliadaPK afiliada_id) {
 		this.afiliada_id = afiliada_id;
 	}
-	public TelefonePK(Long cd_telefone, AfiliadaPK afiliada_id) {
+	public TelefonePK(long cd_telefone, AfiliadaPK afiliada_id) {
 		super();
 		this.cd_telefone = cd_telefone;
 		this.afiliada_id = afiliada_id;
@@ -40,7 +40,7 @@ public class TelefonePK implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((afiliada_id == null) ? 0 : afiliada_id.hashCode());
-		result = prime * result + ((cd_telefone == null) ? 0 : cd_telefone.hashCode());
+		result = prime * result + (int) (cd_telefone ^ (cd_telefone >>> 32));
 		return result;
 	}
 	@Override
@@ -57,10 +57,7 @@ public class TelefonePK implements Serializable{
 				return false;
 		} else if (!afiliada_id.equals(other.afiliada_id))
 			return false;
-		if (cd_telefone == null) {
-			if (other.cd_telefone != null)
-				return false;
-		} else if (!cd_telefone.equals(other.cd_telefone))
+		if (cd_telefone != other.cd_telefone)
 			return false;
 		return true;
 	}

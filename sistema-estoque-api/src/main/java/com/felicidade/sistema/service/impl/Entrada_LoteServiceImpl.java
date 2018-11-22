@@ -112,7 +112,7 @@ public class Entrada_LoteServiceImpl implements Entrada_LoteService {
 	@Transactional(readOnly = true)
 	@Override
 	public Page<Entrada_Lote> findAll(int paginas, int nr_registros) {
-		PageRequest page = PageRequest.of(paginas, nr_registros);
+		Pageable page = PageRequest.of(paginas, nr_registros);
 		return this.findAll(page);
 	}
 

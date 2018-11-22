@@ -8,7 +8,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import com.felicidade.sistema.entity.Saida;
 import com.felicidade.sistema.entity.SaidaPK;
 
-public interface SaidaService extends PagingAndSortingRepository<Saida,Long> {
+public interface SaidaService extends PagingAndSortingRepository<Saida,SaidaPK> {
 
 
 	void saveSaida(Saida saida );

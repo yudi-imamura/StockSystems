@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,7 +37,7 @@ public class TransportadoraController {
 			return ResponseEntity.badRequest().body(response);
 		}
 		transportadoraService.save(transportadora); 
-		response.setData(transportadora);
+		response.setData(transportadora); 
 		}catch(Exception e) {
 			response.getErrors().add(e.getMessage());
 			return ResponseEntity.badRequest().body(response);
@@ -50,12 +51,18 @@ public class TransportadoraController {
 	
 		Response<Transportadora> response = new Response<Transportadora>();
 		try {
+			Long cnpj = transportadora.getCnpj();
+			if (cnpj.toString().length()<15) {
+				result.addError(new ObjectError("CNPJ", "CNPJ está no formato inválido, deve conter 15 algarismos!"));
+			}
 			if(result.hasErrors()) {
 				result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
 				return ResponseEntity.badRequest().body(response);
 			}
-			transportadoraService.update(transportadora);
-			response.setData(transportadora);
+			Transportadora transport = transportadoraService.findById(transportadora.getCd_transportadora());
+			transport = transportadora;
+			transportadoraService.update(transport);
+			response.setData(transport);
 		}catch(Exception e) {
 			response.getErrors().add(e.getMessage());
 			return ResponseEntity.badRequest().body(response);
