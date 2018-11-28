@@ -17,10 +17,13 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 
+import org.hibernate.annotations.Check;
+
 
 @Entity
 @Table(name="TB_FELICIDADE_TRANSPORTADORA",
 uniqueConstraints = {@UniqueConstraint(columnNames="nr_cnpj")})
+@Check(constraints = "nr_cnpj>=100000000000000 AND nr_cnpj<=999999999999999")
 @Inheritance(strategy = InheritanceType.JOINED ) // Herança usando a estratégia JOINED
 public class Transportadora implements Serializable{
 
@@ -31,7 +34,7 @@ public class Transportadora implements Serializable{
 	@Column(name="ds_nome",length=50,nullable=false)
 	private String nome;
 	
-	@Column(name="nr_cnpj",length=15,nullable=false)
+	@Column(name="nr_cnpj",nullable=false)
 	private long cnpj;
 
 	@OneToMany(mappedBy="transportadora", cascade= {CascadeType.REMOVE,CascadeType.REFRESH})

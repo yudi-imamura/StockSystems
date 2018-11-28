@@ -2,6 +2,8 @@ package com.felicidade.sistema.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.felicidade.sistema.entity.Transportadora;
 
 public interface TransportadoraService {
@@ -14,5 +16,6 @@ public interface TransportadoraService {
 
     List<Transportadora> findAll();
 	
+    Page<Transportadora> findAllwithPagination(int page, int count);
 	
 }
