@@ -1,18 +1,21 @@
 package com.felicidade.sistema.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
-import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.felicidade.sistema.entity.Entrada;
 
-public interface EntradaService extends PagingAndSortingRepository<Entrada,Long> {
+public interface EntradaService {
 
-	void saveEntrada(Entrada entrada );
+	void save(Entrada entrada );
 
 	void update(Entrada entrada);
 
-	Entrada buscarPorId(Long id);
+	Entrada findbyId(Long id);
 
-    Page<Entrada> findAll(int paginas,int nr_registros);
+	List<Entrada> findAll(String jpql , Object...params);
+	
+	Page<Entrada> findAll(int paginas,int nr_registros);
 	
 }

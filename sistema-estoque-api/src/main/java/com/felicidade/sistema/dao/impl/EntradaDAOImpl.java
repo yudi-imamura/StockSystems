@@ -1,5 +1,7 @@
 package com.felicidade.sistema.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,4 +22,11 @@ public class EntradaDAOImpl extends AbstractDAO<Entrada, Long> implements Entrad
 	public Entrada findById(long id) {
 		return em.find(Entrada.class, id);
 	}
+
+	@Override
+	public List<Entrada> findAllBy(String query, Object... params) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

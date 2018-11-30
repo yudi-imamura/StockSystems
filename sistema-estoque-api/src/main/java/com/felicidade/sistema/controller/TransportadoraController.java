@@ -1,8 +1,5 @@
 package com.felicidade.sistema.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +24,11 @@ import com.felicidade.sistema.utils.Utils;
 @RestController
 @RequestMapping("/estoque/transportadora")
 @CrossOrigin(origins="*")
-public class TransportadoraController {
+public class TransportadoraController implements IBaseController {
 
 	@Autowired
 	private TransportadoraService transportadoraService;
 
-	protected static List<String> errors = new ArrayList<String>();
-	
 	@PostMapping
 	public ResponseEntity<Response<Transportadora>> RegisterTransportadora(HttpServletRequest request,
 			@RequestBody Transportadora transportadora, BindingResult result ){
@@ -105,8 +100,8 @@ public class TransportadoraController {
 				errors.add("Nenhum registro de transportadora encontrado!");
 				response.setErrors(errors);
 				return ResponseEntity.badRequest().body(response);				
-			}
-			response.setData(transportadoras);
+		}
+		response.setData(transportadoras);
 		return ResponseEntity.ok(response);
 	}
 }

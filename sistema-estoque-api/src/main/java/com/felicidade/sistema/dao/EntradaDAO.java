@@ -12,4 +12,5 @@ public interface EntradaDAO {
 
 	Entrada findById(long id);
 
+	List<Entrada> findAllBy(String query,Object...params);
 }
